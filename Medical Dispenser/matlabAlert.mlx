@@ -1,0 +1,22 @@
+readChannelID = 1372676; 
+TempFieldID = 1; 
+readAPIKey = ''; #read API key here
+[temp,timeStamp] = thingSpeakRead(readChannelID,'Fields',TempFieldID, ... 
+'numDays',7,'ReadKey',readAPIKey); 
+[maxtemp,maxTempIndex] = max(temp); 
+[mintemp,minTempIndex] = min(temp); 
+timeMaxbp = timeStamp(maxTempIndex); 
+timeMinbp = timeStamp(minTempIndex); 
+readChannelID = 1372676; 
+OFieldID = 2; 
+[o2,timeStamp] = thingSpeakRead(readChannelID,'Fields',OFieldID, ... 
+'numDays',7,'ReadKey',readAPIKey); 
+[maxo2,maxTempIndex] = max(o2); 
+[mino2,minTempIndex] = min(o2); 
+timeMaxo2 = timeStamp(maxTempIndex); 
+timeMino2 = timeStamp(minTempIndex); 
+display(maxtemp,'Maximum Temperature is'); 
+display(mino2,'Minimum O2 is'); 
+writeChannelID = 1372903; 
+writeAPIKey = '';  #write API here
+thingSpeakWrite(writeChannelID,[maxtemp,mino2],'WriteKey',writeAPIKey); 
